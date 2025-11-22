@@ -5,6 +5,23 @@
 default:
     @just --list
 
+# RSR Compliance commands
+# =======================
+
+# Check RSR (Rhodium Standard Repository) compliance
+rsr-check:
+    @echo "Running RSR compliance check..."
+    ./scripts/rsr-check.sh
+
+# Validate RSR compliance (alias)
+rsr-validate: rsr-check
+
+# Show RSR compliance status
+rsr-status:
+    @echo "RSR Compliance Status"
+    @echo "====================="
+    @./scripts/rsr-check.sh | grep -E "(Compliance Score|RSR Tier|Passed|Failed|Warnings)"
+
 # Build commands
 # ==============
 

@@ -1,0 +1,26 @@
+# security.txt - RFC 9116 Compliant
+# This file provides security contact information and policies
+
+Contact: mailto:security@example.com
+Contact: https://github.com/yourusername/rescript-wasm-runtime/security/advisories/new
+Expires: 2026-01-22T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://github.com/yourusername/rescript-wasm-runtime/.well-known/security.txt
+Policy: https://github.com/yourusername/rescript-wasm-runtime/blob/main/SECURITY.md
+Hiring: https://example.com/careers
+Acknowledgments: https://github.com/yourusername/rescript-wasm-runtime/blob/main/SECURITY.md#acknowledgments
+
+# Encryption: https://example.com/.well-known/pgp-key.txt
+
+# Additional Information
+# - Please report vulnerabilities responsibly
+# - Do not open public issues for security vulnerabilities
+# - Include reproduction steps and impact assessment
+# - Allow 48 hours for initial response
+# - Coordinated disclosure after fix is released
+
+# Project Information
+# Name: ReScript WASM Runtime
+# Version: 0.1.0
+# License: MIT
+# Repository: https://github.com/yourusername/rescript-wasm-runtime
