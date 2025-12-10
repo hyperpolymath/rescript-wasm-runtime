@@ -1,4 +1,4 @@
-# ReScript WASM Runtime
+= ReScript WASM Runtime
 
 > High-performance, type-safe HTTP server runtime combining ReScript, WebAssembly, and Deno
 
@@ -7,20 +7,20 @@
 [![ReScript](https://img.shields.io/badge/ReScript-v11-red.svg)]()
 [![Deno](https://img.shields.io/badge/Deno-1.40+-blue.svg)]()
 
-## 🚀 Performance Highlights
+== 🚀 Performance Highlights
 
-- **98% smaller bundles**: ~4.8KB vs 5MB typical Node.js stack
-- **94% faster startup**: <100ms cold start vs traditional runtimes
-- **90% less memory**: Minimal memory footprint for microservices
-- **Type-safe**: Full type safety from ReScript to runtime
+- *98% smaller bundles*: ~4.8KB vs 5MB typical Node.js stack
+- *94% faster startup*: <100ms cold start vs traditional runtimes
+- *90% less memory*: Minimal memory footprint for microservices
+- *Type-safe*: Full type safety from ReScript to runtime
 
-## 📦 What is This?
+== 📦 What is This?
 
 ReScript WASM Runtime is a modern alternative to the Node.js + npm stack, combining:
 
-- **ReScript**: Type-safe functional programming language
-- **WebAssembly**: High-performance compilation target
-- **Deno**: Secure, modern JavaScript/TypeScript runtime
+- *ReScript*: Type-safe functional programming language
+- *WebAssembly*: High-performance compilation target
+- *Deno*: Secure, modern JavaScript/TypeScript runtime
 
 Perfect for building:
 - Microservices
@@ -29,45 +29,45 @@ Perfect for building:
 - Serverless functions
 - Edge computing applications
 
-## 🎯 Quick Start
+== 🎯 Quick Start
 
-### Prerequisites
+=== Prerequisites
 
 ```bash
-# Install Deno
+= Install Deno
 curl -fsSL https://deno.land/install.sh | sh
 
-# Install Node.js (for ReScript compiler)
-# https://nodejs.org/
+= Install Node.js (for ReScript compiler)
+= https://nodejs.org/
 
-# Install Just (build tool)
+= Install Just (build tool)
 curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 ```
 
-### Hello World in 3 Steps
+=== Hello World in 3 Steps
 
-1. **Clone and install**:
+1. *Clone and install*:
 ```bash
 git clone https://github.com/yourusername/rescript-wasm-runtime.git
 cd rescript-wasm-runtime
 npm install
 ```
 
-2. **Build**:
+2. *Build*:
 ```bash
 just build
 ```
 
-3. **Run**:
+3. *Run*:
 ```bash
 just dev-hello
 ```
 
 Visit `http://localhost:8000` - you're now running a <1KB HTTP server!
 
-## 📚 Examples
+== 📚 Examples
 
-### Hello World (~1KB)
+=== Hello World (~1KB)
 
 ```rescript
 // examples/hello-world/main.res
@@ -78,7 +78,7 @@ let handler = async (_req: Deno.request): promise<Deno.response> => {
 Server.simple(~port=8000, handler)
 ```
 
-### RESTful API with CRUD
+=== RESTful API with CRUD
 
 ```rescript
 // examples/api-server/main.res
@@ -95,7 +95,7 @@ Server.withRouter(~port=8000, router)
 
 Run: `just dev-api`
 
-### Middleware Example
+=== Middleware Example
 
 ```rescript
 // Custom middleware
@@ -121,7 +121,7 @@ let router = Router.make()
   ->Router.get("/protected", handler)
 ```
 
-## 🛠️ Available Examples
+== 🛠️ Available Examples
 
 | Example | Description | Bundle Size | Run Command |
 |---------|-------------|-------------|-------------|
@@ -131,9 +131,9 @@ let router = Router.make()
 | `static-files` | Static file serving | ~2KB | `just dev-static` |
 | `microservices` | Auth microservice | ~5KB | `just dev-micro` |
 
-## 📖 Core API
+== 📖 Core API
 
-### Server Module
+=== Server Module
 
 ```rescript
 // Simple server
@@ -143,7 +143,7 @@ Server.simple(~port=8000, ~hostname="127.0.0.1", handler)
 Server.withRouter(~port=8000, router)
 ```
 
-### Router Module
+=== Router Module
 
 ```rescript
 let router = Router.make()
@@ -156,7 +156,7 @@ let router = Router.make()
   ->Router.notFound(custom404Handler)
 ```
 
-### Built-in Middleware
+=== Built-in Middleware
 
 ```rescript
 // CORS
@@ -178,7 +178,7 @@ Middleware.errorHandler()
 Middleware.compress()
 ```
 
-### Response Helpers
+=== Response Helpers
 
 ```rescript
 // Text response
@@ -191,9 +191,9 @@ Deno.Response.json(jsonData, ~status=200, ())
 Deno.Response.html("<h1>Hello</h1>", ~status=200, ())
 ```
 
-## 🔧 Development
+== 🔧 Development
 
-### Build Commands
+=== Build Commands
 
 ```bash
 just build          # Build all sources
@@ -202,7 +202,7 @@ just watch          # Watch mode
 just clean          # Clean artifacts
 ```
 
-### Testing
+=== Testing
 
 ```bash
 just test           # Run all tests
@@ -212,7 +212,7 @@ just test-coverage  # With coverage report
 just test-watch     # Watch mode
 ```
 
-### Benchmarking
+=== Benchmarking
 
 ```bash
 just bench          # Run all benchmarks
@@ -222,24 +222,24 @@ just bench-throughput  # Request throughput
 just bench-compare  # Compare with Node.js
 ```
 
-### Container Support
+=== Container Support
 
 ```bash
 just container-build  # Build with Podman
 just container-run    # Run container
 ```
 
-## 📊 Benchmarks
+== 📊 Benchmarks
 
-### Startup Time
+=== Startup Time
 
 | Runtime | Cold Start | First Request | Total |
 |---------|------------|---------------|-------|
 | ReScript + Deno | 95ms | 12ms | 107ms |
 | Node.js + Express | 1,850ms | 45ms | 1,895ms |
-| **Improvement** | **94.8% faster** | **73.3% faster** | **94.3% faster** |
+| *Improvement* | *94.8% faster* | *73.3% faster* | *94.3% faster* |
 
-### Bundle Size
+=== Bundle Size
 
 | Application | ReScript | Node.js | Reduction |
 |-------------|----------|---------|-----------|
@@ -247,17 +247,17 @@ just container-run    # Run container
 | API Server | 4.8KB | 8MB | 99.94% |
 | WebSocket | 3KB | 6MB | 99.95% |
 
-### Memory Usage
+=== Memory Usage
 
 | Runtime | Idle | 100 Conn | 1000 Conn |
 |---------|------|----------|-----------|
 | ReScript + Deno | 12MB | 25MB | 45MB |
 | Node.js + Express | 85MB | 180MB | 450MB |
-| **Improvement** | **85.8%** | **86.1%** | **90.0%** |
+| *Improvement* | *85.8%* | *86.1%* | *90.0%* |
 
 *Run `just bench` to verify these numbers in your environment*
 
-## 🏗️ Architecture
+== 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────┐
@@ -285,15 +285,15 @@ just container-run    # Run container
          └─────────┘    └─────────┘    └──────────┘
 ```
 
-### Key Components
+=== Key Components
 
-1. **Deno.res**: Runtime bindings for Deno APIs
-2. **Server.res**: HTTP server abstraction
-3. **Router.res**: Type-safe routing with middleware
-4. **Middleware.res**: Common middleware implementations
-5. **Examples**: Production-ready application templates
+1. *Deno.res*: Runtime bindings for Deno APIs
+2. *Server.res*: HTTP server abstraction
+3. *Router.res*: Type-safe routing with middleware
+4. *Middleware.res*: Common middleware implementations
+5. *Examples*: Production-ready application templates
 
-## 🎓 Documentation
+== 🎓 Documentation
 
 - [Architecture Guide](docs/architecture.md)
 - [API Reference](docs/api-reference.md)
@@ -302,9 +302,9 @@ just container-run    # Run container
 - [Migration from Node.js](docs/migration.md)
 - [Deployment Guide](docs/deployment.md)
 
-## 🌟 Features
+== 🌟 Features
 
-### ✅ Implemented
+=== ✅ Implemented
 
 - ✓ Full HTTP server implementation
 - ✓ Type-safe routing with path parameters
@@ -322,7 +322,7 @@ just container-run    # Run container
 - ✓ Comprehensive test suite
 - ✓ Benchmark suite
 
-### 🚧 In Progress
+=== 🚧 In Progress
 
 - ⏳ WebAssembly compilation target
 - ⏳ Bun runtime support
@@ -331,7 +331,7 @@ just container-run    # Run container
 - ⏳ Server-side rendering
 - ⏳ Hot reload development mode
 
-### 📋 Planned
+=== 📋 Planned
 
 - ▢ Streaming responses
 - ▢ File upload handling
@@ -340,11 +340,11 @@ just container-run    # Run container
 - ▢ Plugin system
 - ▢ Metrics & monitoring
 
-## 🤝 Contributing
+== 🤝 Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-### Quick Contribution Guide
+=== Quick Contribution Guide
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
@@ -354,42 +354,42 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 6. Push: `git push origin feature/amazing-feature`
 7. Open a Pull Request
 
-## 📝 License
+== 📝 License
 
 MIT License - see [LICENSE](LICENSE) for details
 
-## 🙏 Acknowledgments
+== 🙏 Acknowledgments
 
 - [ReScript](https://rescript-lang.org/) - The ReScript team
 - [Deno](https://deno.land/) - The Deno team
 - [WebAssembly](https://webassembly.org/) - The WASM community
 
-## 📞 Support
+== 📞 Support
 
 - 📧 Email: support@example.com
 - 💬 Discord: [Join our server](https://discord.gg/example)
 - 🐛 Issues: [GitHub Issues](https://github.com/yourusername/rescript-wasm-runtime/issues)
 - 📖 Docs: [Documentation](https://docs.example.com)
 
-## 🗺️ Roadmap
+== 🗺️ Roadmap
 
-### Q1 2025
+=== Q1 2025
 - [ ] WebAssembly compilation pipeline
 - [ ] Bun runtime support
 - [ ] Production deployment guides
 
-### Q2 2025
+=== Q2 2025
 - [ ] Plugin ecosystem
 - [ ] Metrics & observability
 - [ ] Cloud platform integrations
 
-### Q3 2025
+=== Q3 2025
 - [ ] GraphQL support
 - [ ] gRPC support
 - [ ] Advanced caching
 
 ---
 
-**Built with ❤️ using ReScript, Deno, and WebAssembly**
+*Built with ❤️ using ReScript, Deno, and WebAssembly*
 
 *Making web servers fast, small, and type-safe - one bundle at a time.*
