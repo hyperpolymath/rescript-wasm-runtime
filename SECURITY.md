@@ -14,9 +14,9 @@ We release patches for security vulnerabilities in the following versions:
 
 ### Secure Reporting Channels
 
-1. **Email**: security@example.com (encrypted preferred)
-2. **GitLab Security**: Use GitLab's confidential issue feature
-3. **GPG Key**: Available at .well-known/pgp-key.txt
+1. **Email**: hyperpolymath@proton.me
+2. **GitHub Security**: Use GitHub's security advisory feature
+3. **GitLab Security**: Use GitLab's confidential issue feature
 
 ### What to Include
 
@@ -208,8 +208,7 @@ Currently no formal bug bounty program. Security researchers are encouraged to r
 
 ## Contact
 
-- **Security Email**: security@example.com
-- **PGP Key**: See .well-known/pgp-key.txt
+- **Security Email**: hyperpolymath@proton.me
 - **Security.txt**: See .well-known/security.txt
 
 ---

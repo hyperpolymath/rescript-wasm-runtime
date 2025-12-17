@@ -7,16 +7,17 @@
   "version": "0.1.0",
   "dateCreated": "2025-12-10",
   "dateModified": "2025-12-10",
-  "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+  "license": "https://spdx.org/licenses/MIT.html OR https://spdx.org/licenses/AGPL-3.0-or-later.html",
   "codeRepository": "https://github.com/hyperpolymath/rescript-wasm-runtime",
   "issueTracker": "https://github.com/hyperpolymath/rescript-wasm-runtime/issues",
-  "programmingLanguage": ["Guile Scheme"],
+  "programmingLanguage": ["ReScript", "TypeScript", "Scheme"],
   "developmentStatus": "active",
   "keywords": ["RSR", "rhodium-standard"],
   "author": [{
     "@type": "Person",
-    "givenName": "Hyper",
-    "familyName": "Polymath",
+    "givenName": "Jonathan D.A.",
+    "familyName": "Jewell",
+    "alternateName": "hyperpolymath",
     "email": "hyperpolymath@proton.me"
   }],
   "isPartOf": [{

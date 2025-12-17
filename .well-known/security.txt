@@ -1,16 +1,13 @@
 # security.txt - RFC 9116 Compliant
 # This file provides security contact information and policies
 
-Contact: mailto:security@example.com
-Contact: https://github.com/yourusername/rescript-wasm-runtime/security/advisories/new
-Expires: 2026-01-22T00:00:00.000Z
+Contact: mailto:hyperpolymath@proton.me
+Contact: https://github.com/hyperpolymath/rescript-wasm-runtime/security/advisories/new
+Expires: 2026-12-17T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://github.com/yourusername/rescript-wasm-runtime/.well-known/security.txt
-Policy: https://github.com/yourusername/rescript-wasm-runtime/blob/main/SECURITY.md
-Hiring: https://example.com/careers
-Acknowledgments: https://github.com/yourusername/rescript-wasm-runtime/blob/main/SECURITY.md#acknowledgments
-
-# Encryption: https://example.com/.well-known/pgp-key.txt
+Canonical: https://github.com/hyperpolymath/rescript-wasm-runtime/.well-known/security.txt
+Policy: https://github.com/hyperpolymath/rescript-wasm-runtime/blob/main/SECURITY.md
+Acknowledgments: https://github.com/hyperpolymath/rescript-wasm-runtime/blob/main/SECURITY.md#acknowledgments
 
 # Additional Information
 # - Please report vulnerabilities responsibly
@@ -22,5 +19,5 @@ Acknowledgments: https://github.com/yourusername/rescript-wasm-runtime/blob/main
 # Project Information
 # Name: ReScript WASM Runtime
 # Version: 0.1.0
-# License: MIT
-# Repository: https://github.com/yourusername/rescript-wasm-runtime
+# License: MIT OR AGPL-3.0-or-later
+# Repository: https://github.com/hyperpolymath/rescript-wasm-runtime

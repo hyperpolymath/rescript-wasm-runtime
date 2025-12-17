@@ -175,4 +175,4 @@ This is the initial stable release. No upgrade path needed.
 - 🚨 Breaking change
 - 🗑️ Deprecated
 
-For more details on any release, see the [GitHub Releases](https://github.com/yourusername/rescript-wasm-runtime/releases) page.
+For more details on any release, see the [GitHub Releases](https://github.com/hyperpolymath/rescript-wasm-runtime/releases) page.

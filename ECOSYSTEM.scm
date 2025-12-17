@@ -6,7 +6,7 @@
   (version "1.0.0")
   (name "rescript-wasm-runtime")
   (type "project")
-  (purpose "Jonathan D.A. Jewell <jonathan.jewell@gmail.com>")
+  (purpose "High-performance, type-safe HTTP server runtime combining ReScript with WASM compilation targets")
 
   (position-in-ecosystem
     "Part of hyperpolymath ecosystem. Follows RSR guidelines.")
@@ -16,5 +16,5 @@
              (url "https://github.com/hyperpolymath/rhodium-standard-repositories")
              (relationship "standard")))
 
-  (what-this-is "Jonathan D.A. Jewell <jonathan.jewell@gmail.com>")
+  (what-this-is "A minimal footprint HTTP server framework for Deno/Bun with ReScript type safety")
   (what-this-is-not "- NOT exempt from RSR compliance"))

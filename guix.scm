@@ -19,7 +19,7 @@
     (synopsis "ReScript application")
     (description "ReScript application - part of the RSR ecosystem.")
     (home-page "https://github.com/hyperpolymath/rescript-wasm-runtime")
-    (license license:agpl3+)))
+    (license (list license:expat license:agpl3+))))
 
 ;; Return package for guix shell
 rescript_wasm_runtime
