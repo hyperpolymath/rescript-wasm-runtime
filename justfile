@@ -265,3 +265,46 @@ push:
 tag VERSION:
     git tag v{{VERSION}}
     git push origin v{{VERSION}}
+
+# ============================================================================
+# Superintendent Audit Recipes
+# ============================================================================
+
+# Full superintendent audit
+audit:
+    @echo "╔══════════════════════════════════════════════════════════════════╗"
+    @echo "║          Superintendent Audit: rescript-wasm-runtime             ║"
+    @echo "╚══════════════════════════════════════════════════════════════════╝"
+    @just audit-sharedmemory
+    @just audit-dag
+    @echo ""
+    @echo "Audit complete."
+
+# Audit SharedArrayBuffer zero-copy support
+audit-sharedmemory:
+    @echo ""
+    @echo "── Zero-Copy SharedMemory ────────────────────────────────────────────"
+    @test -f src/SharedMemory.res && echo "✓ SharedMemory module exists" || echo "✗ MISSING: SharedMemory module"
+    @grep -q "SharedArrayBuffer" src/SharedMemory.res 2>/dev/null && echo "✓ SharedArrayBuffer bindings" || echo "✗ MISSING: SharedArrayBuffer"
+    @grep -q "Atomics" src/SharedMemory.res 2>/dev/null && echo "✓ Atomics for thread safety" || echo "✗ MISSING: Atomics"
+    @grep -q "memoryPool" src/SharedMemory.res 2>/dev/null && echo "✓ Memory pool management" || echo "✗ MISSING: Memory pool"
+    @grep -q "writeCommitHistory" src/SharedMemory.res 2>/dev/null && echo "✓ Commit history serialization" || echo "✗ MISSING: Commit history support"
+
+# Audit DAG builder for dependency analysis
+audit-dag:
+    @echo ""
+    @echo "── DAG Dependency Analysis ───────────────────────────────────────────"
+    @test -f src/DependencyGraph.res && echo "✓ DependencyGraph module exists" || echo "✗ MISSING: DependencyGraph module"
+    @grep -q "findCycles" src/DependencyGraph.res 2>/dev/null && echo "✓ Cycle detection" || echo "✗ MISSING: Cycle detection"
+    @grep -q "topologicalSort" src/DependencyGraph.res 2>/dev/null && echo "✓ Topological sort" || echo "✗ MISSING: Topological sort"
+    @grep -q "suggestedRoot" src/DependencyGraph.res 2>/dev/null && echo "✓ Root preservation logic" || echo "✗ MISSING: Root preservation"
+    @grep -q "eliminationCandidates" src/DependencyGraph.res 2>/dev/null && echo "✓ Elimination scoring" || echo "✗ MISSING: Elimination scoring"
+    @grep -q "criticalPath" src/DependencyGraph.res 2>/dev/null && echo "✓ Critical path analysis" || echo "✗ MISSING: Critical path"
+
+# Verify superintendent environment
+super-check:
+    @echo "Checking Superintendent Environment..."
+    @command -v rescript >/dev/null 2>&1 && echo "✓ ReScript available" || echo "✗ ReScript missing"
+    @command -v deno >/dev/null 2>&1 && echo "✓ Deno available" || echo "✗ Deno missing"
+    @command -v wasm-pack >/dev/null 2>&1 && echo "○ wasm-pack available" || echo "○ wasm-pack optional (for WASM builds)"
+    @echo "Environment check complete."
