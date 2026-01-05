@@ -8,6 +8,95 @@ module Memory = {
   @new external create: {"initial": int, "maximum": int} => t = "WebAssembly.Memory"
   @get external buffer: t => Js.Typed_array.ArrayBuffer.t = "buffer"
   @send external grow: (t, int) => int = "grow"
+
+  // Get a Uint8Array view of memory
+  let asUint8Array = (memory: t): Js.Typed_array.Uint8Array.t => {
+    Js.Typed_array.Uint8Array.fromBuffer(buffer(memory))
+  }
+
+  // Copy bytes from ReScript to WASM memory at given offset
+  let copyToWasm = (memory: t, offset: int, data: Js.Typed_array.Uint8Array.t): unit => {
+    let view = asUint8Array(memory)
+    let len = Js.Typed_array.Uint8Array.length(data)
+    for i in 0 to len - 1 {
+      let byte = Js.Typed_array.Uint8Array.unsafe_get(data, i)
+      Js.Typed_array.Uint8Array.unsafe_set(view, offset + i, byte)
+    }
+  }
+
+  // Copy bytes from WASM memory to ReScript
+  let copyFromWasm = (memory: t, offset: int, len: int): Js.Typed_array.Uint8Array.t => {
+    let view = asUint8Array(memory)
+    Js.Typed_array.Uint8Array.subarray(view, ~start=offset, ~end_=offset + len)
+  }
+
+  // Write a 32-bit integer to memory (little-endian)
+  let writeInt32 = (memory: t, offset: int, value: int): unit => {
+    let view = asUint8Array(memory)
+    Js.Typed_array.Uint8Array.unsafe_set(view, offset, land(value, 0xff))
+    Js.Typed_array.Uint8Array.unsafe_set(view, offset + 1, land(lsr(value, 8), 0xff))
+    Js.Typed_array.Uint8Array.unsafe_set(view, offset + 2, land(lsr(value, 16), 0xff))
+    Js.Typed_array.Uint8Array.unsafe_set(view, offset + 3, land(lsr(value, 24), 0xff))
+  }
+
+  // Read a 32-bit integer from memory (little-endian)
+  let readInt32 = (memory: t, offset: int): int => {
+    let view = asUint8Array(memory)
+    let b0 = Js.Typed_array.Uint8Array.unsafe_get(view, offset)
+    let b1 = Js.Typed_array.Uint8Array.unsafe_get(view, offset + 1)
+    let b2 = Js.Typed_array.Uint8Array.unsafe_get(view, offset + 2)
+    let b3 = Js.Typed_array.Uint8Array.unsafe_get(view, offset + 3)
+    lor(lor(lor(b0, lsl(b1, 8)), lsl(b2, 16)), lsl(b3, 24))
+  }
+}
+
+// WASM allocator protocol - expected exports from WASM modules
+module Allocator = {
+  // Type for WASM pointer (offset into linear memory)
+  type ptr = int
+
+  // Null pointer constant
+  let nullptr: ptr = 0
+
+  // Check if pointer is valid
+  let isValid = (p: ptr): bool => p > 0
+
+  // Expected function signatures from WASM module exports
+  type allocFn = int => ptr           // alloc(size) -> ptr
+  type freeFn = ptr => unit           // free(ptr)
+  type reallocFn = (ptr, int) => ptr  // realloc(ptr, new_size) -> ptr
+
+  // Allocator instance wrapping WASM exports
+  type t = {
+    alloc: allocFn,
+    free: freeFn,
+    realloc: option<reallocFn>,
+  }
+
+  // Create allocator from WASM instance exports
+  let fromExports = (exports: Instance.exports): t => {
+    let allocFn: allocFn = %raw(`exports.alloc`)
+    let freeFn: freeFn = %raw(`exports.free`)
+    let reallocFn: option<reallocFn> = %raw(`exports.realloc ? exports.realloc : undefined`)
+    {alloc: allocFn, free: freeFn, realloc: reallocFn}
+  }
+
+  // Allocate and copy data to WASM memory, returns pointer
+  let allocBytes = (allocator: t, memory: Memory.t, data: Js.Typed_array.Uint8Array.t): ptr => {
+    let len = Js.Typed_array.Uint8Array.length(data)
+    let ptr = allocator.alloc(len)
+    if isValid(ptr) {
+      Memory.copyToWasm(memory, ptr, data)
+    }
+    ptr
+  }
+
+  // Read bytes from pointer and free the memory
+  let readAndFree = (allocator: t, memory: Memory.t, ptr: ptr, len: int): Js.Typed_array.Uint8Array.t => {
+    let data = Memory.copyFromWasm(memory, ptr, len)
+    allocator.free(ptr)
+    data
+  }
 }
 
 // WASM table (for indirect function calls)
