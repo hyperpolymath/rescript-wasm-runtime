@@ -1,4 +1,4 @@
-;; SPDX-License-Identifier: AGPL-3.0-or-later
+;; SPDX-License-Identifier: PMPL-1.0-or-later
 ;; ECOSYSTEM.scm - Ecosystem position for rescript-wasm-runtime
 ;; Media-Type: application/vnd.ecosystem+scm
 
@@ -27,9 +27,9 @@
       (relationship "Affine type system compiler that may target this runtime")
       (url "github.com/hyperpolymath/affinescript"))
     (potential-consumer
-      (name "gitvisor")
+      (name "git-hud")
       (relationship "Git supervision tool that could use WASM for performance")
-      (url "github.com/hyperpolymath/gitvisor"))
+      (url "github.com/hyperpolymath/git-hud"))
     (potential-consumer
       (name "hackenbush-ssg")
       (relationship "Static site generator that could use WASM plugins")
